@@ -1,0 +1,36 @@
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: trivy-scan-source
+  labels:
+    apps.kadras.io/task: scan
+    apps.kadras.io/scanner: trivy
+    apps.kadras.io/target: source
+spec:
+  description: Scans a given application source code directory with Trivy.
+  params:
+    - name: source-url
+    - name: source-revision
+    - name: source-subpath
+    - name: trivy-args
+      default:
+        - "--ignore-unfixed"
+  workspaces:
+    - name: source-dir
+      mountPath: /workspace/source-dir
+  steps:
+    - name: prepare
+      image: paketobuildpacks/build-jammy-base:0.1.47
+      workingDir: /tekton/home
+      securityContext:
+        runAsNonRoot: true
+      script: |-
+        cd `mktemp -d`
+        curl -SL $(params.source-url) | tar xvz -m
+        cd $(params.source-subpath)
+        mv * $(workspaces.source-dir.path)
+    - name: scan
+      image: aquasec/trivy:0.38.3
+      workingDir: $(workspaces.source-dir.path)
+      args: ["fs", "$(params.trivy-args[*])", "."]
