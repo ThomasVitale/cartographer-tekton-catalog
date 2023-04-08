@@ -21,7 +21,7 @@ spec:
       mountPath: /workspace/source-dir
   steps:
     - name: prepare
-      image: paketobuildpacks/build-jammy-base:0.1.47
+      image: paketobuildpacks/build-jammy-base:0.1.48
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -31,6 +31,6 @@ spec:
         cd $(params.source-subpath)
         mv * $(workspaces.source-dir.path)
     - name: scan
-      image: aquasec/trivy:0.38.3
+      image: aquasec/trivy:0.39.0
       workingDir: $(workspaces.source-dir.path)
       args: ["fs", "$(params.trivy-args[*])", "."]
