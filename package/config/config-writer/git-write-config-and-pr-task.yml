@@ -66,7 +66,7 @@ spec:
       mountPath: /workspaces/repo-dir
   steps:
     - name: prepare-config-files
-      image: paketobuildpacks/build-jammy-base:0.1.47
+      image: paketobuildpacks/build-jammy-base:0.1.48
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -125,7 +125,7 @@ spec:
         echo "$commit_branch" > /workspaces/repo-dir/commit_branch
 
     - name: open-pr
-      image: ghcr.io/jenkins-x/jx-scm:0.2.19
+      image: ghcr.io/jenkins-x/jx-scm:0.2.21
       workingDir: /tekton/home
       script: |
         #!/usr/bin/env sh

@@ -16,5 +16,5 @@ spec:
         - "--only-fixed"
   steps:
     - name: scan
-      image: anchore/grype:v0.59.1
+      image: anchore/grype:v0.61.0
       args: ["$(params.image)", "$(params.grype-args[*])"]

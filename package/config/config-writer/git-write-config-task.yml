@@ -39,7 +39,7 @@ spec:
       mountPath: /workspace/config-dir
   steps:
     - name: prepare-config-files
-      image: paketobuildpacks/build-jammy-base:0.1.47
+      image: paketobuildpacks/build-jammy-base:0.1.48
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
