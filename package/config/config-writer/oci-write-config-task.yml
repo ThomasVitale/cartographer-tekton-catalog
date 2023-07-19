@@ -2,11 +2,11 @@
 apiVersion: tekton.dev/v1
 kind: Task
 metadata:
-  name: image-write-config
+  name: oci-write-config
 spec:
   description: |-
     Consumes application deployment configuration files as a Base64-encoded JSON and
-    pushes them to an OCI registry as an image bundle (imgpkg format).
+    pushes them to an OCI registry as an OCI bundle (imgpkg artifact type).
   params:
     - name: bundle
       description: The fully qualified name of the OCI repository where to push the configuration files.
@@ -23,7 +23,7 @@ spec:
       mountPath: /workspace/config-dir
   steps:
     - name: prepare-config-files
-      image: paketobuildpacks/build-jammy-base:0.1.48
+      image: paketobuildpacks/build-jammy-base
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -35,8 +35,8 @@ spec:
         echo '$(params.files)' | base64 -d > files.json
         eval "$(cat files.json | jq -r 'to_entries | .[] | @sh "mkdir -p $(dirname \(.key)) && echo \(.value) > \(.key) && mv \(.key) $(workspaces.config-dir.path)/"')"
     
-    - name: publish-config-bundle
-      image: paketobuildpacks/build-jammy-base:0.1.48
+    - name: publish-oci-bundle
+      image: paketobuildpacks/build-jammy-base
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -50,7 +50,7 @@ spec:
         curl -L https://carvel.dev/install.sh | K14SIO_INSTALL_BIN_DIR=local-bin bash
         export PATH=$PWD/local-bin/:$PATH
 
-        # Initialize bundle
+        # Initialize OCI bundle
         mkdir -p .imgpkg
         echo "---
         apiVersion: imgpkg.carvel.dev/v1alpha1

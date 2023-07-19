@@ -8,7 +8,7 @@ metadata:
     apps.kadras.io/scanner: trivy
     apps.kadras.io/target: source
 spec:
-  description: Scans a given application source code directory with Trivy.
+  description: Scans a given application source code directory for vulnerabilities with Trivy.
   params:
     - name: source-url
     - name: source-revision
@@ -21,7 +21,7 @@ spec:
       mountPath: /workspace/source-dir
   steps:
     - name: prepare
-      image: paketobuildpacks/build-jammy-base:0.1.48
+      image: paketobuildpacks/build-jammy-base
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -31,6 +31,6 @@ spec:
         cd $(params.source-subpath)
         mv * $(workspaces.source-dir.path)
     - name: scan
-      image: aquasec/trivy:0.39.0
+      image: aquasec/trivy
       workingDir: $(workspaces.source-dir.path)
       args: ["fs", "$(params.trivy-args[*])", "."]

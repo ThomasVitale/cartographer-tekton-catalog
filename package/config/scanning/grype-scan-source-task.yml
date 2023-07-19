@@ -8,7 +8,7 @@ metadata:
     apps.kadras.io/scanner: grype
     apps.kadras.io/target: source
 spec:
-  description: Scans a given application source code directory with Grype.
+  description: Scans a given application source code directory for vulnerabilities with Grype.
   params:
     - name: source-url
     - name: source-revision
@@ -21,7 +21,7 @@ spec:
       mountPath: /workspace/source-dir
   steps:
     - name: prepare
-      image: paketobuildpacks/build-jammy-base:0.1.48
+      image: paketobuildpacks/build-jammy-base
       workingDir: /tekton/home
       securityContext:
         runAsNonRoot: true
@@ -31,6 +31,6 @@ spec:
         cd $(params.source-subpath)
         mv * $(workspaces.source-dir.path)
     - name: scan
-      image: anchore/grype:v0.61.0
+      image: anchore/grype
       workingDir: $(workspaces.source-dir.path)
       args: ["dir:.", "$(params.grype-args[*])"]

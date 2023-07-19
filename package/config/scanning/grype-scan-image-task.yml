@@ -8,7 +8,7 @@ metadata:
     apps.kadras.io/scanner: grype
     apps.kadras.io/target: image
 spec:
-  description: Scans a given OCI image with Grype.
+  description: Scans a given OCI image for vulnerabilities with Grype.
   params:
     - name: image
     - name: grype-args
@@ -16,5 +16,5 @@ spec:
         - "--only-fixed"
   steps:
     - name: scan
-      image: anchore/grype:v0.61.0
+      image: anchore/grype
       args: ["$(params.image)", "$(params.grype-args[*])"]
