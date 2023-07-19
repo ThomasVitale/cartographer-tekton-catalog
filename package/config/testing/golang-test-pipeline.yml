@@ -7,7 +7,7 @@ metadata:
     apps.kadras.io/pipeline: test
     apps.kadras.io/language: golang
 spec:
-  description: Runs tests for a GO application.
+  description: Runs tests for a Go application.
   params:
     - name: source-url
     - name: source-revision
@@ -28,7 +28,7 @@ spec:
           - name: source-subpath
         steps:
           - name: test
-            image: cgr.dev/chainguard/go:1.20
+            image: cgr.dev/chainguard/go
             securityContext:
               runAsNonRoot: true
             script: |-

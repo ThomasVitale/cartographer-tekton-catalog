@@ -28,7 +28,7 @@ spec:
           - name: source-subpath
         steps:
           - name: test
-            image: cgr.dev/chainguard/jdk:openjdk-17
+            image: cgr.dev/chainguard/jdk
             securityContext:
               runAsNonRoot: true
             script: |-
