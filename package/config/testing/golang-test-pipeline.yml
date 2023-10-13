@@ -4,8 +4,8 @@ kind: Pipeline
 metadata:
   name: go-test-pipeline
   labels:
-    apps.kadras.io/pipeline: test
-    apps.kadras.io/language: golang
+    app.kadras.io/pipeline: test
+    app.kadras.io/language: golang
 spec:
   description: Runs tests for a Go application.
   params:

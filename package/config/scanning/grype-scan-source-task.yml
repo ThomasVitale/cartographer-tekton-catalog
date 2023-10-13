@@ -4,9 +4,9 @@ kind: Task
 metadata:
   name: grype-scan-source
   labels:
-    apps.kadras.io/task: scan
-    apps.kadras.io/scanner: grype
-    apps.kadras.io/target: source
+    app.kadras.io/task: scan
+    app.kadras.io/scanner: grype
+    app.kadras.io/target: source
 spec:
   description: Scans a given application source code directory for vulnerabilities with Grype.
   params:

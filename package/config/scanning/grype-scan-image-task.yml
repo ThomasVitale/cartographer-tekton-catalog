@@ -4,9 +4,9 @@ kind: Task
 metadata:
   name: grype-scan-image
   labels:
-    apps.kadras.io/task: scan
-    apps.kadras.io/scanner: grype
-    apps.kadras.io/target: image
+    app.kadras.io/task: scan
+    app.kadras.io/scanner: grype
+    app.kadras.io/target: image
 spec:
   description: Scans a given OCI image for vulnerabilities with Grype.
   params:

@@ -4,8 +4,8 @@ kind: Pipeline
 metadata:
   name: java-test-pipeline
   labels:
-    apps.kadras.io/pipeline: test
-    apps.kadras.io/language: java
+    app.kadras.io/pipeline: test
+    app.kadras.io/language: java
 spec:
   description: Runs tests for a Java application using Gradle or Maven.
   params:
