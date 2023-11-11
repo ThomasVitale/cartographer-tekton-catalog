@@ -6,6 +6,9 @@
 [![The Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Follow us on Twitter](https://img.shields.io/static/v1?label=Twitter&message=Follow&color=1DA1F2)](https://twitter.com/kadrasIO)
 
+> **Warning**
+> This package has been archived. The tasks and pipelines from this package are now included in the [cartographer-supply-chains](cartographer-supply-chains) package.
+
 A Carvel package providing a set of Tekton pipelines and tasks used by the Kadras platform to support testing, scanning, delivering and deploying applications.
 
 ## 🚀&nbsp; Getting Started
